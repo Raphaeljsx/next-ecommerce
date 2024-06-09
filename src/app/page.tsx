@@ -1,33 +1,29 @@
-import Image from "next/image";
 
-export default function Home() {
+import { ProductType } from "@/types/ProductType";
+import Image from "next/image";
+import Product from "./components/Product";
+
+async function getProducts() {
+  const res = await fetch('https://fakestoreapi.com/products')
+
+  if(!res.ok){
+    throw new Error('Failed to fetch data');
+  }
+
+  return res.json();
+}
+
+
+export default async function Home() {
+  const products = await getProducts();
+  
+  // Fake api products: https://fakestoreapi.com/products
   return (
     <div className="container justify-center pt-8 px-8 xl:px-0">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 xl:gap-6">
-        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-          <p>Prod 1</p>
-        </div>
-        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-          <p>Prod 2</p>
-        </div>
-        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-          <p>Prod 3</p>
-        </div>
-        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-          <p>Prod 4</p>
-        </div>
-        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-          <p>Prod 5</p>
-        </div>
-        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-          <p>Prod 6</p>
-        </div>
-        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-          <p>Prod 7</p>
-        </div>
-        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-          <p>Prod 8</p>
-        </div>
+        {products.map((product: ProductType)=>(
+          <Product key={product.id} product={product}></Product>
+        ))}
       </div>
     </div>
   );
