@@ -17,10 +17,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="PT-BR">
+    <html lang="pt-BR">
       <body className={inter.className}>
         <Navbar/>
-        <main className="bg-slate-700 h-screen p-16">
+        <main className="bg-slate-700 h-screen p-16 flex justify-center">
           {children}
         </main>
       </body>
