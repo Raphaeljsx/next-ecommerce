@@ -1,6 +1,5 @@
 
 import { ProductType } from "@/types/ProductType";
-import Image from "next/image";
 import Product from "./components/Product";
 
 async function getProducts() {
